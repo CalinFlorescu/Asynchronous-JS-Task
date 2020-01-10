@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fetch USERS Git</title>
+    <style>
+
+        #page {
+            background-color: bisque;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        img {
+            height: 200px;
+            width: 150px;
+        }
+        .div5{
+            flex: 20%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="page" id="page">
+    <button id='btnUsers'> Fetch Users</button>
+    <div id="divResult">
+<!--        <img src="" alt="" class="post__img">-->
+<!--        <h4 class="post__name"></h4>-->
+    </div>
+</div>
+<script>
+    const btnUser = document.getElementById("btnUsers");
+    const divParent = document.getElementById("page");
+    const c = document.getElementsByTagName('DIV')[1];
+    // const divResult = document.getElementById("divResult");
+    btnUser.addEventListener("click", getUsers);
+
+    async function getUsers() {
+        clear();
+        btnUser.style.display ="none";
+        const url = "https://api.github.com/users";
+        const response = await fetch(url,{
+            headers: new Headers({
+                'User-agent': 'Mozilla/4.0 Custom User Agent'
+            })
+        });
+        const result = await response.json();
+        let i = 0;
+        result.forEach(function (rez) {
+            // if (i % 5 ===0) {
+            //     divParent.appendChild(document.createElement("br"));
+            //     console.log(i);
+            // }
+            const name = rez.login;
+            const picture = rez.avatar_url;
+            let newPost = document.createElement('DIV');
+            newPost.setAttribute("class", "div5");
+            let img = document.createElement("img");
+            let h4 = document.createElement('h4');
+            h4.innerText = name;
+            img.src = picture;
+            newPost.appendChild(img);
+            newPost.appendChild(h4);
+
+            console.log(newPost);
+            divParent.appendChild(newPost);
+            i++;
+        });
+    }
+
+    function clear() {
+        while (divResult.firstChild)
+            divResult.removeChild(divResult.firstChild);
+    }
+</script>
+</body>
+</html>
+
