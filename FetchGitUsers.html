@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Fetch USERS Git</title>
     <style>
-
+    <!-- Poti sa mai lucrezi la partea de css, iti sugerez sa cauti chestii legate de cum functioneaza margin, padding, align -->
+    <!-- Te rog incearca sa separi css-ul intr-un fisier separat, pentru ca pe un proiect mediu, sau mare nu o sa intelegi nimic daca tii si codul de css cu cel de html -->
         #page {
             background-color: bisque;
             display: flex;
@@ -22,6 +23,7 @@
     </style>
 </head>
 <body>
+<!-- Nu ai nevoie de class, class se foloseste pentru a grupa mai multe elemente cu acelasi style, poti folosi doar id care ar trebui sa fie unic pentru un element -->
 <div class="page" id="page">
     <button id='btnUsers'> Fetch Users</button>
     <div id="divResult">
@@ -29,6 +31,7 @@
 <!--        <h4 class="post__name"></h4>-->
     </div>
 </div>
+<!-- Ce am scris de css e valabil si pentru js, sa faci fisiere separate pentru fiecare -->
 <script>
     const btnUser = document.getElementById("btnUsers");
     const divParent = document.getElementById("page");
@@ -39,7 +42,9 @@
     async function getUsers() {
         clear();
         btnUser.style.display ="none";
-        const url = "https://api.github.com/users";
+        const url = "https://api.github.com/users"; // Foarte bine ca ai facut o constanta pentru url, era mai ok daca o bagai intr-un fisier de constante
+
+        // Daca faci cu await ar trebui sa imbraci tot request ul intr-un bloc de try catch ca sa prinzi posibilele erori
         const response = await fetch(url,{
             headers: new Headers({
                 'User-agent': 'Mozilla/4.0 Custom User Agent'
@@ -52,6 +57,7 @@
             //     divParent.appendChild(document.createElement("br"));
             //     console.log(i);
             // }
+            // Pe viitor sa nu mai trimiti cod comentat
             const name = rez.login;
             const picture = rez.avatar_url;
             let newPost = document.createElement('DIV');
@@ -68,7 +74,7 @@
             i++;
         });
     }
-
+    // Poti cauta o modalitate mai eleganta sa faci elemente dinamice pe viitor
     function clear() {
         while (divResult.firstChild)
             divResult.removeChild(divResult.firstChild);
