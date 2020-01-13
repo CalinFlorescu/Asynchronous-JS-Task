@@ -1,5 +1,6 @@
 const containerDiv = document.getElementsByClassName("container")[0];
 
+// Apreciez ca ai folosit arrow function, dar nu trebuie folosite mereu, exista o diferenta majora intre functiile normale si astea, te rog sa o cauti si sa mi dai mesaj cu ea :D
 createDynamicList = list => {
     let listLength = list.length;
 
@@ -7,6 +8,7 @@ createDynamicList = list => {
         let myList = document.createElement("div");
         myList.className = "oneRow";
 
+        //Te poti folosi de functii din js gen forEach, e mai elegant putin
         for (let i = 0; i < listLength;) {
             let listItem = document.createElement("div");
             listItem.className = "userItem";
@@ -41,14 +43,17 @@ createDynamicList = list => {
 };
 
 getUsers = async() => {
+    // Foloseste try catch in caz ca iti da eroare
     const response = await fetch("http://api.github.com/users");
     const myJson = await response.json();
     return myJson;
 };
 
-myFunction = async() => {
+myFunction = async() => { // Da un nume sugestiv functiei
     const users = await getUsers();
     createDynamicList(users);
 };
 
 myFunction();
+
+// Felicitari, per total o tema facuta bine
