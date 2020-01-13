@@ -7,13 +7,13 @@ body {
     font-family: "Times New Roman", Times, serif;
 }
 
-.container {
+#container {
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    <!-- Poti incerca sa te uiti peste display: flex -->
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
     position: relative;
 }
 
@@ -42,7 +42,7 @@ body {
 .userItem {
     width: 20%;
     border: 2px solid rgb(17, 1, 1);
-    margin: 2px
+    margin: 2px;
 }
 
 .userItem img {
